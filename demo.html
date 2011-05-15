@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery Meow Demo</title>
+    <script src="jquery-1.6.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="jquery.meow.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      $(document).ready(function() {
+        $('#button').meow('click', 'Hello, world!');
+      });
+    </script>
+  </head>
+
+  <body>
+    <button id="button">Click Me!</button>
+
+    <div id="meows"></div>
+
+  </body>
+</html>
