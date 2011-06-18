@@ -77,26 +77,28 @@
       if (typeof options === 'string') {
         event = options;
       } else if (typeof options == 'object') {
-        // is the message an object we need to parse or just a string?
+        // set the event
         if (typeof options.trigger === 'string') {
           trigger = options.trigger;
         }
-        if (typeof options.message === 'string') {
-          message = options.message;
-        } else if (typeof options.message === 'object') {
-          var type = options.message[0].nodeName;
-          if ($.inArray(type, ['INPUT', 'SELECT', 'TEXTAREA']) !== -1) {
-            message = options.message.attr('value');
-          } else {
-            message = options.message.text();
-          }
-        }
-        if (typeof options.icon === 'string') {
-          icon = options.icon;
-        }
+        // is the message an object we need to parse or just a string?
+
       }
-      if (trigger && message) {
+      if (typeof trigger === 'string') {
         $(this).bind(trigger, function () {
+          if (typeof options.message === 'string') {
+            message = options.message;
+          } else if (typeof options.message === 'object') {
+            var type = options.message[0].nodeName;
+            if ($.inArray(type, ['INPUT', 'SELECT', 'TEXTAREA']) !== -1) {
+              message = options.message.attr('value');
+            } else {
+              message = options.message.text();
+            }
+          }
+          if (typeof options.icon === 'string') {
+            icon = options.icon;
+          }
           methods.createMessage(message, icon);
         });
       }
