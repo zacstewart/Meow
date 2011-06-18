@@ -13,19 +13,23 @@
     <script src="jquery.meow.js" type="text/javascript" charset="utf-8"></script>
     <script>
       $(document).ready(function() {
-        $(this).meow('ready', {
+        $(this).meow({
+          trigger: 'ready',
           message: $('#onready'),
           icon: 'nyan-cat.gif'
         });
-        $('#button').meow('click', {
+        $('#button').meow({
+          trigger: 'click',
           message: $('#onclick'),
           icon: 'nyan-cat.gif'
         });
-        $('#onchange').meow('change', {
+        $('#onchange').meow({
+          trigger: 'change',
           message: $('#onchange'),
           icon: 'nyan-cat.gif'
         });
-        $('#selectonchange').meow('change', {
+        $('#selectonchange').meow({
+          trigger: 'change',
           message: $('#selectonchange'),
           icon: 'nyan-cat.gif'
         });

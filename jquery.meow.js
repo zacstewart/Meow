@@ -35,9 +35,9 @@
       if (event.type === 'mouseleave') {
         that.hovered = false;
         that.manifest.removeClass('hover');
-       if (that.timestamp + that.duration <= Date.now()) {
+        if (that.timestamp + that.duration <= Date.now()) {
           that.destroy();
-        };
+        }
       } else {
         that.hovered = true;
         that.manifest.addClass('hover');
@@ -68,11 +68,19 @@
     }
   };
 
-  $.fn.meow = function (event, options) {
-    var message,
+  $.fn.meow = function (options) {
+    var trigger,
+      message,
       icon;
     return this.each(function () {
-      if (typeof options === 'object') {
+      console.log(arguments);
+      if (typeof options === 'string') {
+        event = options;
+      } else if (typeof options == 'object') {
+        // is the message an object we need to parse or just a string?
+        if (typeof options.trigger === 'string') {
+          trigger = options.trigger;
+        }
         if (typeof options.message === 'string') {
           message = options.message;
         } else if (typeof options.message === 'object') {
@@ -86,11 +94,9 @@
         if (typeof options.icon === 'string') {
           icon = options.icon;
         }
-      } else if (typeof options === 'string') {
-        message = options;
       }
-      if (event && message) {
-        $(this).bind(event, function () {
+      if (trigger && message) {
+        $(this).bind(trigger, function () {
           methods.createMessage(message, icon);
         });
       }
