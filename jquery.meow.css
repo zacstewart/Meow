@@ -1,4 +1,12 @@
+#meows {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
 .meow {
+  margin: 20px 20px 0 0;
+}
+.meow .inner {
   background: rgba(25, 25, 25, .75);
   border: 2px solid transparent;
   border-radius: 10px;
@@ -7,13 +15,21 @@
   font-family: Helvetica, Arial, sans-serif;
   font-size: 15px;
   padding: 10px;
-  position: fixed;
-  right: 20px;
-  top: 20px;
   text-shadow: 1px 1px 3px #000;
   width: 300px;
-  height: 40px;
+  min-height: 40px;
 }
-.meow:hover {
+.meow.hover .inner {
   border: 2px solid #fff;
+}
+
+.meow .inner .icon {
+  width: 48px;
+  height: 48px;
+  float: left;
+  margin-right: 6px;
+}
+.meow .inner .icon img {
+  max-width: 48px;
+  max-height: 48px;
 }
