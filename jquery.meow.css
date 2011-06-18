@@ -21,12 +21,20 @@
   padding: 10px;
   text-shadow: 1px 1px 3px #000;
   width: 300px;
-  min-height: 40px;
+  min-height: 48px;
 }
 .meow.hover .inner {
   border: 2px solid #fff;
 }
 
+.meow .inner:after {
+	content: "\0200";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
 .meow .inner .icon {
   width: 48px;
   height: 48px;
