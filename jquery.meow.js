@@ -73,7 +73,6 @@
       message,
       icon;
     return this.each(function () {
-      console.log(arguments);
       if (typeof options === 'string') {
         event = options;
       } else if (typeof options == 'object') {

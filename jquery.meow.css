@@ -9,6 +9,10 @@
 .meow .inner {
   background: rgba(25, 25, 25, .75);
   border: 2px solid transparent;
+  -moz-border-radius: 10px;
+  -webket-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  -o-border-radius: 10px;
   border-radius: 10px;
   box-shadow: 2px 2px 10px rgba(25, 25, 25, .25);
   color: #fff;
