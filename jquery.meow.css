@@ -26,7 +26,13 @@
 .meow.hover .inner {
   border: 2px solid #fff;
 }
-
+.meow .inner h1 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
 .meow .inner:after {
 	content: "\0200";
 	display: block;

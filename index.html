@@ -24,6 +24,7 @@
           icon: 'https://secure.gravatar.com/avatar/c5e99d5ecfaab30b92d9a7cdb34e0e33?s=48'
         });
         $('#onchange').meow({
+          title: 'I have a defined title!',
           trigger: 'change',
           message: $('#onchange'),
           icon: 'nyan-cat.gif'
@@ -32,6 +33,12 @@
           trigger: 'change',
           message: $('#selectonchange'),
           icon: 'nyan-cat.gif'
+        });
+        $('#unbound').click(function () {
+          $(document).meow({
+            message: 'I\'m an unbound meow!',
+            icon: 'nyan-cat.gif'
+          });
         });
       });
     </script>
@@ -51,7 +58,7 @@
 
     <h2>Click Demo</h2>
     <p>
-      <textarea id="onclick" title="Click Demo">I'll meow when you click the button.</textarea><br>
+      <textarea id="onclick" title="Click Demo" title="Click Demo">I'll meow when you click the button.</textarea><br>
       <button id="button">Click Me!</button>
     </p>
 
@@ -66,5 +73,8 @@
         <option value="nyan-3">Nyan 3</option>
       </select>
     </p>
+    <h2>Unbound Demo</h2>
+    <p>This one isn't bound to an event. We just call <code>$.meow()</code> without a trigger.</p>
+    <p><button id="unbound">Click me!</button></p>
   </body>
 </html>
