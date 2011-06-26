@@ -73,16 +73,14 @@
         icon,
         message_type;
 
-
       if (typeof options.title === 'string') {
         title = options.title;
       }
-
+      console.log(options.message);
       if (typeof options.message === 'string') {
         message_type = 'string';
       } else if (typeof options.message === 'object') {
         message_type = options.message.first().nodeName;
-        // console.log(options.message.attr('title'));
         if (typeof title === 'undefined' && typeof options.message.attr('title') === 'string') {
           title = options.message.attr('title');
         }
@@ -118,25 +116,26 @@
     }
   };
 
-  $.fn.meow = function (options) {
+  $.fn.meow = function (args) {
     var options,
       trigger;
     return this.each(function () {
-      if (typeof options === 'string') {
+      if (typeof args === 'string') {
         trigger = options;
-      } else if (typeof options === 'object') {
+      } else if (typeof args === 'object') {
         // set the event
-        if (typeof options.trigger === 'string') {
-          trigger = options.trigger;
+        if (typeof args.trigger === 'string') {
+          trigger = args.trigger;
         }
       }
       if (typeof trigger === 'string') {
         $(this).bind(trigger, function () {
-          options = methods.configMessage(options);
+          options = methods.configMessage(args);
           methods.createMessage(options);
+          console.log(options);
         });
       } else if (typeof trigger === 'undefined') {
-        options = methods.configMessage(options);
+        options = methods.configMessage(args);
         methods.createMessage(options);
       }
     });
