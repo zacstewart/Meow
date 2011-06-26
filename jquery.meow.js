@@ -76,11 +76,10 @@
       if (typeof options.title === 'string') {
         title = options.title;
       }
-      console.log(options.message);
       if (typeof options.message === 'string') {
         message_type = 'string';
       } else if (typeof options.message === 'object') {
-        message_type = options.message.first().nodeName;
+        message_type = options.message.get(0).nodeName;
         if (typeof title === 'undefined' && typeof options.message.attr('title') === 'string') {
           title = options.message.attr('title');
         }
@@ -132,7 +131,6 @@
         $(this).bind(trigger, function () {
           options = methods.configMessage(args);
           methods.createMessage(options);
-          console.log(options);
         });
       } else if (typeof trigger === 'undefined') {
         options = methods.configMessage(args);
