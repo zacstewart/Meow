@@ -33,13 +33,13 @@
     this.message = options.message;
     this.icon = options.icon;
     this.timestamp = Date.now();
-    this.duration = 2400;
+    this.duration = options.duration || 2400;
     this.hovered = false;
     this.manifest = {};
     $('#meows').append($(document.createElement('div'))
       .attr('id', 'meow-' + this.timestamp)
       .addClass('meow')
-      .html($(document.createElement('div')).addClass('inner').text(this.message))
+      .html($(document.createElement('div')).addClass('inner').html(this.message))
       .hide()
       .fadeIn(400));
 
@@ -94,7 +94,8 @@
         title,
         message,
         icon,
-        message_type;
+        message_type,
+        duration;
 
       if (typeof options.title === 'string') {
         title = options.title;
@@ -125,10 +126,15 @@
       if (typeof options.icon === 'string') {
         icon = options.icon;
       }
+
+      duration = options.duration;
+
       return {
         trigger: trigger,
         message: message,
         icon: icon,
+        title: title,
+        duration: duration,
         message_type: message_type
       }
     },
