@@ -36,13 +36,43 @@
     this.duration = options.duration || 2400;
     this.hovered = false;
     this.manifest = {};
+    
+    var prevent = false;
+          $('#meows').contents().each(function(index) {
+       var inner = $(this).find('.inner')[0];
+       var message = $(this).find('.message')[0];
+       var title = $(this).find('.title')[0];
+       var iconImg = $(this).find('img')[0];
+       var iconSrc = iconImg ? $(iconImg).attr('src') : null;
+
+       if (options.message == $(message).text()
+           && (!options.title || options.title == $(title).text())
+           && (!options.icon || options.icon == iconSrc)) {
+
+           var count = 2;
+           var countTag = $(this).find('.count')[0];
+           if (countTag) {
+               count = Number($(countTag).text());
+               count++;
+               $(countTag).html(count);
+           } else {
+               $(inner).prepend('<span class="count strong">' + count + '</span>');
+           }
+           prevent = true;
+       }
+   });
+
+   if (prevent) {
+       return;
+   }
+           
     $('#meows').append($(document.createElement('div'))
       .attr('id', 'meow-' + this.timestamp)
       .addClass('meow')
-      .html($(document.createElement('div')).addClass('inner').html(this.message))
+      .html($(document.createElement('div')).addClass('inner'))
       .hide()
       .fadeIn(400));
-
+    
     this.manifest = $('#meow-' + this.timestamp);
 
     if (typeof this.title === 'string') {
@@ -50,6 +80,10 @@
         $(document.createElement('h1')).text(this.title)
       );
     }
+    
+    this.manifest.find('.inner').prepend(
+       $(document.createElement('h1')).addClass('message').html(this.message)
+    );
 
     if (typeof that.icon === 'string') {
       this.manifest.find('.inner').prepend(
@@ -140,7 +174,7 @@
     },
     createMessage: function (options) {
       var meow = new Meow(options);
-      meows[meow.timestampe] = meow;
+      meows[meow.timestamp] = meow;
     }
   };
 

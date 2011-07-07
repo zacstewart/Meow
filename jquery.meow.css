@@ -51,3 +51,6 @@
   max-width: 48px;
   max-height: 48px;
 }
+.meow .inner .count {
+    float: right;
+}
