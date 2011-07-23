@@ -13,13 +13,13 @@
     <script src="jquery.meow.js" type="text/javascript" charset="utf-8"></script>
     <script>
       $(document).ready(function() {
-        $(this).meow({
+        $.meow({
           trigger: 'ready',
           message: $('#onready'),
           icon: 'nyan-cat.gif'
         });
         $('#button').click(function () {
-          $(document).meow({
+          $.meow({
             message: $('#onclick'),
             icon: 'https://secure.gravatar.com/avatar/c5e99d5ecfaab30b92d9a7cdb34e0e33?s=48'
           });

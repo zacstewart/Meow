@@ -27,7 +27,6 @@
   var meows = {};
 
   function Meow(options) {
-    console.log(options);
     var that = this,
       message_type;
     this.timestamp = Date.now();  // used to identify this meow and timeout
@@ -77,8 +76,6 @@
 
     this.manifest = $('#meow-' + this.timestamp.toString());
 
-    console.log(this.manifest);
-
     if (typeof this.title === 'string') {
       this.manifest.find('.inner').prepend(
         $(document.createElement('h1')).text(this.title)
@@ -126,5 +123,8 @@
     return this.each(function () {
       return new Meow(args);
     });
+  };
+  $.meow = function (args) {
+    return $.fn.meow(args);
   };
 }(jQuery));
