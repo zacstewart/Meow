@@ -13,29 +13,31 @@
     <script src="jquery.meow.js" type="text/javascript" charset="utf-8"></script>
     <script>
       $(document).ready(function() {
-        $(this).meow({
-          trigger: 'ready',
+        $.meow({
           message: $('#onready'),
           icon: 'nyan-cat.gif'
         });
-        $('#button').meow({
-          trigger: 'click',
-          message: $('#onclick'),
-          icon: 'https://secure.gravatar.com/avatar/c5e99d5ecfaab30b92d9a7cdb34e0e33?s=48'
+        $('#button').click(function () {
+          $.meow({
+            message: $('#onclick'),
+            icon: 'https://secure.gravatar.com/avatar/c5e99d5ecfaab30b92d9a7cdb34e0e33?s=48'
+          });
         });
-        $('#onchange').meow({
-          title: 'I have a defined title!',
-          trigger: 'change',
-          message: $('#onchange'),
-          icon: 'nyan-cat.gif'
+        $('#onchange').change(function () {
+          $.meow({
+            title: 'I have a defined title!',
+            message: $('#onchange'),
+            icon: 'nyan-cat.gif'
+          });
         });
-        $('#selectonchange').meow({
-          trigger: 'change',
-          message: $('#selectonchange'),
-          icon: 'nyan-cat.gif'
+        $('#selectonchange').change(function () {
+          $.meow({
+            message: $('#selectonchange'),
+            icon: 'nyan-cat.gif'
+          });
         });
         $('#unbound').click(function () {
-          $(document).meow({
+          $.meow({
             message: 'I\'m an unbound meow!',
             icon: 'nyan-cat.gif'
           });

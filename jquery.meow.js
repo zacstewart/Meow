@@ -1,7 +1,7 @@
 // jQuery Meow by Zachary Stewart (zacstewart.com)
 //
 // Copyright (c) 2011 Zachary Stewart
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -9,10 +9,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,26 +24,61 @@
 (function ($) {
   'use strict';
 
-  var meows = {},
-    methods = {};
+  var meows = {};
 
   function Meow(options) {
-    var that = this;
-    this.title = options.title
-    this.message = options.message;
-    this.icon = options.icon;
-    this.timestamp = Date.now();
-    this.duration = options.duration || 2400;
-    this.hovered = false;
-    this.manifest = {};
+    var that = this,
+      message_type;
+    this.timestamp = Date.now();  // used to identify this meow and timeout
+    this.hovered = false;         // whether mouse is over or not
+    this.manifest = {};           // stores the DOM object of this meow
+
+    meows[this.timestamp] = this;
+
+    if (typeof options.title === 'string') {
+      this.title = options.title;
+    }
+    if (typeof options.message === 'string') {
+      message_type = 'string';
+    } else if (typeof options.message === 'object') {
+      message_type = options.message.get(0).nodeName;
+      if (typeof this.title === 'undefined' && typeof options.message.attr('title') === 'string') {
+        this.title = options.message.attr('title');
+      }
+    }
+
+    console.log(message_type);
+    switch (message_type) {
+    case 'string':
+      this.message = options.message;
+      break;
+    case 'SELECT':
+      this.message = options.message.find('option:selected').text();
+      break;
+    case 'INPUT':
+    case 'SELECT':
+    case 'TEXTAREA':
+      this.message = options.message.attr('value');
+      break;
+    default:
+      this.message = options.message.text();
+      break;
+    }
+
+    if (typeof options.icon === 'string') {
+      this.icon = options.icon;
+    }
+
+    this.duration = options.duration || 5000;
+
     $('#meows').append($(document.createElement('div'))
-      .attr('id', 'meow-' + this.timestamp)
+      .attr('id', 'meow-' + this.timestamp.toString())
       .addClass('meow')
       .html($(document.createElement('div')).addClass('inner').html(this.message))
       .hide()
       .fadeIn(400));
 
-    this.manifest = $('#meow-' + this.timestamp);
+    this.manifest = $('#meow-' + this.timestamp.toString());
 
     if (typeof this.title === 'string') {
       this.manifest.find('.inner').prepend(
@@ -88,83 +123,10 @@
     };
   }
 
-  methods = {
-    configMessage: function (options) {
-      var trigger,
-        title,
-        message,
-        icon,
-        message_type,
-        duration;
-
-      if (typeof options.title === 'string') {
-        title = options.title;
-      }
-      if (typeof options.message === 'string') {
-        message_type = 'string';
-      } else if (typeof options.message === 'object') {
-        message_type = options.message.get(0).nodeName;
-        if (typeof title === 'undefined' && typeof options.message.attr('title') === 'string') {
-          title = options.message.attr('title');
-        }
-      }
-
-      switch (message_type) {
-      case 'string':
-        message = options.message;
-        break;
-      case 'INPUT':
-      case 'SELECT':
-      case 'TEXTAREA':
-        message = options.message.attr('value');
-        break;
-      default:
-        message = options.message.text();
-        break;
-      }
-
-      if (typeof options.icon === 'string') {
-        icon = options.icon;
-      }
-
-      duration = options.duration;
-
-      return {
-        trigger: trigger,
-        message: message,
-        icon: icon,
-        title: title,
-        duration: duration,
-        message_type: message_type
-      }
-    },
-    createMessage: function (options) {
-      var meow = new Meow(options);
-      meows[meow.timestampe] = meow;
-    }
-  };
-
   $.fn.meow = function (args) {
-    var options,
-      trigger;
-    return this.each(function () {
-      if (typeof args === 'string') {
-        trigger = options;
-      } else if (typeof args === 'object') {
-        // set the event
-        if (typeof args.trigger === 'string') {
-          trigger = args.trigger;
-        }
-      }
-      if (typeof trigger === 'string') {
-        $(this).bind(trigger, function () {
-          options = methods.configMessage(args);
-          methods.createMessage(options);
-        });
-      } else if (typeof trigger === 'undefined') {
-        options = methods.configMessage(args);
-        methods.createMessage(options);
-      }
-    });
+    new Meow(args);
+  };
+  $.meow = function (args) {
+    $.fn.meow(args);
   };
 }(jQuery));
