@@ -1,7 +1,7 @@
 // jQuery Meow by Zachary Stewart (zacstewart.com)
 //
 // Copyright (c) 2011 Zachary Stewart
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -9,10 +9,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,11 +27,14 @@
   var meows = {};
 
   function Meow(options) {
+    console.log(options);
     var that = this,
       message_type;
     this.timestamp = Date.now();  // used to identify this meow and timeout
     this.hovered = false;         // whether mouse is over or not
     this.manifest = {};           // stores the DOM object of this meow
+
+    meows[this.timestamp] = this;
 
     if (typeof options.title === 'string') {
       this.title = options.title;
@@ -64,15 +67,17 @@
     }
 
     this.duration = options.duration || 2400;
-    
+
     $('#meows').append($(document.createElement('div'))
-      .attr('id', 'meow-' + this.timestamp.toString)
+      .attr('id', 'meow-' + this.timestamp.toString())
       .addClass('meow')
       .html($(document.createElement('div')).addClass('inner').html(this.message))
       .hide()
       .fadeIn(400));
 
-    this.manifest = $('#meow-' + this.timestamp.toString);
+    this.manifest = $('#meow-' + this.timestamp.toString());
+
+    console.log(this.manifest);
 
     if (typeof this.title === 'string') {
       this.manifest.find('.inner').prepend(
@@ -115,7 +120,6 @@
         });
       });
     };
-    meows[this.timestamp] = this;
   }
 
   $.fn.meow = function (args) {

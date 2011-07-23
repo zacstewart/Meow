@@ -18,10 +18,11 @@
           message: $('#onready'),
           icon: 'nyan-cat.gif'
         });
-        $('#button').meow({
-          trigger: 'click',
-          message: $('#onclick'),
-          icon: 'https://secure.gravatar.com/avatar/c5e99d5ecfaab30b92d9a7cdb34e0e33?s=48'
+        $('#button').click(function () {
+          $(document).meow({
+            message: $('#onclick'),
+            icon: 'https://secure.gravatar.com/avatar/c5e99d5ecfaab30b92d9a7cdb34e0e33?s=48'
+          });
         });
         $('#onchange').meow({
           title: 'I have a defined title!',
