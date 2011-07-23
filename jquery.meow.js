@@ -23,107 +23,104 @@
 
 (function ($) {
   'use strict';
+  var this_meow,
+    meows = {},
+    Meow = function (options) {
+      var that = this,
+        message_type;
+      this.timestamp = Date.now();  // used to identify this meow and timeout
+      this.hovered = false;         // whether mouse is over or not
+      this.manifest = {};           // stores the DOM object of this meow
 
-  var meows = {};
-
-  function Meow(options) {
-    var that = this,
-      message_type;
-    this.timestamp = Date.now();  // used to identify this meow and timeout
-    this.hovered = false;         // whether mouse is over or not
-    this.manifest = {};           // stores the DOM object of this meow
-
-    meows[this.timestamp] = this;
-
-    if (typeof options.title === 'string') {
-      this.title = options.title;
-    }
-    if (typeof options.message === 'string') {
-      message_type = 'string';
-    } else if (typeof options.message === 'object') {
-      message_type = options.message.get(0).nodeName;
-      if (typeof this.title === 'undefined' && typeof options.message.attr('title') === 'string') {
-        this.title = options.message.attr('title');
+      if (typeof options.title === 'string') {
+        this.title = options.title;
       }
-    }
+      if (typeof options.message === 'string') {
+        message_type = 'string';
+      } else if (typeof options.message === 'object') {
+        message_type = options.message.get(0).nodeName;
+        if (typeof this.title === 'undefined' && typeof options.message.attr('title') === 'string') {
+          this.title = options.message.attr('title');
+        }
+      }
 
-    switch (message_type) {
-    case 'string':
-      this.message = options.message;
-      break;
-    case 'SELECT':
-      this.message = options.message.find('option:selected').text();
-      break;
-    case 'INPUT':
-    case 'SELECT':
-    case 'TEXTAREA':
-      this.message = options.message.attr('value');
-      break;
-    default:
-      this.message = options.message.text();
-      break;
-    }
+      switch (message_type) {
+      case 'string':
+        this.message = options.message;
+        break;
+      case 'INPUT':
+      case 'TEXTAREA':
+        this.message = options.message.attr('value');
+        break;
+      case 'SELECT':
+        this.message = options.message.find('option:selected').text();
+        break;
+      default:
+        this.message = options.message.text();
+        break;
+      }
 
-    if (typeof options.icon === 'string') {
-      this.icon = options.icon;
-    }
+      if (typeof options.icon === 'string') {
+        this.icon = options.icon;
+      }
 
-    this.duration = options.duration || 5000;
+      this.duration = options.duration || 5000;
 
-    $('#meows').append($(document.createElement('div'))
-      .attr('id', 'meow-' + this.timestamp.toString())
-      .addClass('meow')
-      .html($(document.createElement('div')).addClass('inner').html(this.message))
-      .hide()
-      .fadeIn(400));
+      $('#meows').append($(document.createElement('div'))
+        .attr('id', 'meow-' + this.timestamp.toString())
+        .addClass('meow')
+        .html($(document.createElement('div')).addClass('inner').html(this.message))
+        .hide()
+        .fadeIn(400));
 
-    this.manifest = $('#meow-' + this.timestamp.toString());
+      this.manifest = $('#meow-' + this.timestamp.toString());
 
-    if (typeof this.title === 'string') {
-      this.manifest.find('.inner').prepend(
-        $(document.createElement('h1')).text(this.title)
-      );
-    }
+      if (typeof this.title === 'string') {
+        this.manifest.find('.inner').prepend(
+          $(document.createElement('h1')).text(this.title)
+        );
+      }
 
-    if (typeof that.icon === 'string') {
-      this.manifest.find('.inner').prepend(
-        $(document.createElement('div')).addClass('icon').html(
-          $(document.createElement('img')).attr('src', this.icon)
-        )
-      );
-    }
+      if (typeof that.icon === 'string') {
+        this.manifest.find('.inner').prepend(
+          $(document.createElement('div')).addClass('icon').html(
+            $(document.createElement('img')).attr('src', this.icon)
+          )
+        );
+      }
 
-    this.manifest.bind('mouseenter mouseleave', function (event) {
-      if (event.type === 'mouseleave') {
-        that.hovered = false;
-        that.manifest.removeClass('hover');
-        if (that.timestamp + that.duration <= Date.now()) {
+      this.manifest.bind('mouseenter mouseleave', function (event) {
+        if (event.type === 'mouseleave') {
+          that.hovered = false;
+          that.manifest.removeClass('hover');
+          if (that.timestamp + that.duration <= Date.now()) {
+            that.destroy();
+          }
+        } else {
+          that.hovered = true;
+          that.manifest.addClass('hover');
+        }
+      });
+
+      this.timeout = setTimeout(function () {
+        if (that.hovered !== true && typeof that === 'object') {
           that.destroy();
         }
-      } else {
-        that.hovered = true;
-        that.manifest.addClass('hover');
-      }
-    });
+      }, that.duration);
 
-    this.timeout = setTimeout(function () {
-      if (that.hovered !== true && typeof that === 'object') {
-        that.destroy();
-      }
-    }, that.duration);
-
-    this.destroy = function () {
-      that.manifest.find('.inner').fadeTo(400, 0, function () {
-        that.manifest.slideUp(function () {
-          that.manifest.remove();
-          delete meows[that.timestamp];
+      this.destroy = function () {
+        that.manifest.find('.inner').fadeTo(400, 0, function () {
+          that.manifest.slideUp(function () {
+            that.manifest.remove();
+            delete meows[that.timestamp];
+          });
         });
-      });
+      };
     };
-  }
 
   $.fn.meow = function (args) {
-    new Meow(args);
+    this_meow = new Meow(args);
+    meows[this_meow.timestamp] = this_meow;
   };
   $.meow = function (args) {
     $.fn.meow(args);
