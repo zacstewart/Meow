@@ -47,9 +47,13 @@
       }
     }
 
+    console.log(message_type);
     switch (message_type) {
     case 'string':
       this.message = options.message;
+      break;
+    case 'SELECT':
+      this.message = options.message.find('option:selected').text();
       break;
     case 'INPUT':
     case 'SELECT':
@@ -65,7 +69,7 @@
       this.icon = options.icon;
     }
 
-    this.duration = options.duration || 2400;
+    this.duration = options.duration || 5000;
 
     $('#meows').append($(document.createElement('div'))
       .attr('id', 'meow-' + this.timestamp.toString())
@@ -120,11 +124,9 @@
   }
 
   $.fn.meow = function (args) {
-    return this.each(function () {
-      return new Meow(args);
-    });
+    new Meow(args);
   };
   $.meow = function (args) {
-    return $.fn.meow(args);
+    $.fn.meow(args);
   };
 }(jQuery));
