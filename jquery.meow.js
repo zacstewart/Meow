@@ -47,7 +47,6 @@
       }
     }
 
-    console.log(message_type);
     switch (message_type) {
     case 'string':
       this.message = options.message;
