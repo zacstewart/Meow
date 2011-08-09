@@ -5,6 +5,7 @@
 }
 .meow {
   margin: 20px 20px 0 0;
+  position: relative;
 }
 .meow .inner {
   background: rgba(25, 25, 25, .75);
@@ -23,6 +24,14 @@
   width: 300px;
   min-height: 48px;
 }
+.meow .inner:after {
+  content: "\0200";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
 .meow.hover .inner {
   border: 2px solid #fff;
 }
@@ -33,14 +42,6 @@
   padding: 0;
   line-height: 1;
 }
-.meow .inner:after {
-	content: "\0200";
-	display: block;
-	clear: both;
-	visibility: hidden;
-	line-height: 0;
-	height: 0;
-}
 .meow .inner .icon {
   width: 48px;
   height: 48px;
@@ -50,4 +51,27 @@
 .meow .inner .icon img {
   max-width: 48px;
   max-height: 48px;
+}
+.meow .inner .close {
+  display: none;
+}
+.meow.hover .inner .close {
+  -khtml-border-radius: 18px;
+  -moz-border-radius: 18px;
+  -o-border-radius: 18px;
+  -webket-border-radius: 18px;
+  background: rgba(25, 25, 25, .75);
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  display: block;
+  font-size: 22px;
+  font-weight: 500;
+  height: 18px;
+  left: 4px;
+  line-height: 14px;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  top: 4px;
+  width: 18px;
 }

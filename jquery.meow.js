@@ -92,6 +92,15 @@
         );
       }
 
+      if (options.closeable !== false) {
+        this.manifest.find('.inner').prepend(
+          $(document.createElement('a')).addClass('close').html('&times;').attr('href', 'javascript:;').click(function (e) {
+            e.preventDefault();
+            that.destroy();
+          })
+        );
+      }
+
       this.manifest.bind('mouseenter mouseleave', function (event) {
         if (event.type === 'mouseleave') {
           that.hovered = false;

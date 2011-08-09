@@ -43,6 +43,13 @@
             sticky: true
           });
         });
+        $('#uncloseable').click(function () {
+          $.meow({
+            message: 'I am uncloseable!',
+            icon: 'nyan-cat.gif',
+            closeable: false
+          });
+        });
       });
     </script>
   </head>
@@ -79,5 +86,8 @@
     <h2>Sticky Demo</h2>
     <p>This one won't go away until you close it.</p>
     <p><button id="sticky">Click me!</button></p>
+    <h2>Uncloseable Demo</h2>
+    <p>This one doesn't have a close button (not a good combo with the sticky option!).</p>
+    <p><button id="uncloseable">Click me!</button></p>
   </body>
 </html>
