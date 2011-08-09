@@ -36,10 +36,11 @@
             icon: 'nyan-cat.gif'
           });
         });
-        $('#unbound').click(function () {
+        $('#sticky').click(function () {
           $.meow({
-            message: 'I\'m an unbound meow!',
-            icon: 'nyan-cat.gif'
+            message: 'I\'m a sticky meow!',
+            icon: 'nyan-cat.gif',
+            sticky: true
           });
         });
       });
@@ -75,8 +76,8 @@
         <option value="nyan-3">Nyan 3</option>
       </select>
     </p>
-    <h2>Unbound Demo</h2>
-    <p>This one isn't bound to an event. We just call <code>$.meow()</code> without a trigger.</p>
-    <p><button id="unbound">Click me!</button></p>
+    <h2>Sticky Demo</h2>
+    <p>This one won't go away until you close it.</p>
+    <p><button id="sticky">Click me!</button></p>
   </body>
 </html>

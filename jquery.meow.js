@@ -63,8 +63,11 @@
       if (typeof options.icon === 'string') {
         this.icon = options.icon;
       }
-
-      this.duration = options.duration || 5000;
+      if (options.sticky) {
+        this.duration = Infinity;
+      } else {
+        this.duration = options.duration || 5000;
+      }
 
       $('#meows').append($(document.createElement('div'))
         .attr('id', 'meow-' + this.timestamp.toString())
@@ -101,12 +104,14 @@
           that.manifest.addClass('hover');
         }
       });
-
-      this.timeout = setTimeout(function () {
-        if (that.hovered !== true && typeof that === 'object') {
-          that.destroy();
-        }
-      }, that.duration);
+      
+      if (this.duration !== Infinity) {
+        this.timeout = setTimeout(function () {
+          if (that.hovered !== true && typeof that === 'object') {
+            that.destroy();
+          }
+        }, that.duration);
+      }
 
       this.destroy = function () {
         that.manifest.find('.inner').fadeTo(400, 0, function () {
