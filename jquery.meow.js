@@ -23,15 +23,43 @@
 
 (function ($) {
   'use strict';
-  var this_meow,
-    meows = {},
+  // Meow queue
+  var meow_area,
+    meows = {
+      queue: {},
+      add: function (meow) {
+        this.queue[meow.timestamp] = meow;
+      },
+      get: function (timestamp) {
+        return this.queue[timestamp];
+      },
+      remove: function (timestamp) {
+        delete this.queue[timestamp];
+      },
+      size: function () {
+        var size = 0;
+        for (var timestamp in this.queue) {
+          if (this.queue.hasOwnProperty(timestamp)) { size += 1; }
+        }
+        return size;
+      }
+    },
+    // Meow constructor
     Meow = function (options) {
       var that = this,
         message_type;
-      this.timestamp = Date.now();  // used to identify this meow and timeout
+      this.timestamp = +new Date(); // used to identify this meow and timeout
       this.hovered = false;         // whether mouse is over or not
       this.manifest = {};           // stores the DOM object of this meow
-
+      
+      if (meows.size() <= 0) {
+        meow_area = 'meows-' + (+new Date());
+        $('body').prepend($(document.createElement('div')).attr({id: meow_area, 'class': 'meows'}));
+        if (typeof options.beforeCreateFirst === 'function') {
+          options.beforeCreateFirst.call(that);
+        }
+      }
+      
       if (typeof options.title === 'string') {
         this.title = options.title;
       }
@@ -68,8 +96,14 @@
       } else {
         this.duration = options.duration || 5000;
       }
+      
+      // Call callback if it's defined (this = meow object)
+      if (typeof options.beforeCreate === 'function') {
+        options.beforeCreate.call(that);
+      }
 
-      $('#meows').append($(document.createElement('div'))
+      // Add the meow to the meow area
+      $('#' + meow_area).append($(document.createElement('div'))
         .attr('id', 'meow-' + this.timestamp.toString())
         .addClass('meow')
         .html($(document.createElement('div')).addClass('inner').html(this.message))
@@ -77,13 +111,15 @@
         .fadeIn(400));
 
       this.manifest = $('#meow-' + this.timestamp.toString());
-
+      
+      // Add title if it's defined
       if (typeof this.title === 'string') {
         this.manifest.find('.inner').prepend(
           $(document.createElement('h1')).text(this.title)
         );
       }
-
+      
+      // Add icon if it's defined
       if (typeof that.icon === 'string') {
         this.manifest.find('.inner').prepend(
           $(document.createElement('div')).addClass('icon').html(
@@ -91,13 +127,19 @@
           )
         );
       }
-
+      
+      // Add close button if the meow isn't uncloseable
+      // TODO: this close button needs to be much prettier
       if (options.closeable !== false) {
         this.manifest.find('.inner').prepend(
-          $(document.createElement('a')).addClass('close').html('&times;').attr('href', 'javascript:;').click(function (e) {
-            e.preventDefault();
-            that.destroy();
-          })
+          $(document.createElement('a'))
+            .addClass('close')
+            .html('&times;')
+            .attr('href', 'javascript:;')
+            .click(function (e) {
+              e.preventDefault();
+              that.destroy();
+            })
         );
       }
 
@@ -105,6 +147,7 @@
         if (event.type === 'mouseleave') {
           that.hovered = false;
           that.manifest.removeClass('hover');
+          // Destroy the mow on mouseleave if it's timed out
           if (that.timestamp + that.duration <= Date.now()) {
             that.destroy();
           }
@@ -114,27 +157,48 @@
         }
       });
       
+      // Add a timeout if the duration isn't Infinity
       if (this.duration !== Infinity) {
         this.timeout = setTimeout(function () {
-          if (that.hovered !== true && typeof that === 'object') {
-            that.destroy();
+          // Make sure this meow hasn't already been destroyed
+          if (typeof meows.get(that.timestamp) !== 'undefined') {
+            // Call callback if it's defined (this = meow DOM element)
+            if (typeof options.onTimeout === 'function') {
+              options.onTimeout.call(that.manifest);
+            }
+            // Don't destroy if user is hovering over meow
+            if (that.hovered !== true && typeof that === 'object') {
+              that.destroy();
+            }
           }
         }, that.duration);
       }
 
       this.destroy = function () {
+        // Call callback if it's defined (this = meow DOM element)
+  			if (typeof options.beforeDestroy === 'function') {
+  			  options.beforeDestroy.call(that.manifest);
+  			}
         that.manifest.find('.inner').fadeTo(400, 0, function () {
           that.manifest.slideUp(function () {
             that.manifest.remove();
-            delete meows[that.timestamp];
+            meows.remove(that.timestamp);
+            if (typeof options.afterDestroy === 'function') {
+      			  options.afterDestroy.call(null);
+      			}
+      			if (meows.size() <= 0) {
+      			  $('#' + meow_area).remove();
+        			if (typeof options.lastDestroyed === 'function') {
+        			  options.lastDestroyed.call(null);
+        			}
+      			}
           });
         });
       };
     };
 
   $.fn.meow = function (args) {
-    this_meow = new Meow(args);
-    meows[this_meow.timestamp] = this_meow;
+    meows.add(new Meow(args));
   };
   $.meow = function (args) {
     $.fn.meow(args);

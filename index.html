@@ -50,12 +50,38 @@
             closeable: false
           });
         });
+        $('#callbacks').click(function () {
+          $.meow({
+            message: 'I have callbacks!',
+            icon: 'nyan-cat.gif',
+            beforeCreateFirst: function () {
+              alert(this + ' is the first meow!');
+            },
+            beforeCreate: function () {
+              alert('About to create ' + this);
+            },
+            afterCreate: function () {
+              alert('Just created ' + this);
+            },
+            onTimeout: function () {
+              alert(this + ' just timed out.');
+            },
+            beforeDestroy: function () {
+              alert('About to destroy ' + this);
+            },
+            afterDestroy: function () {
+              alert('And it\'s gone');
+            },
+            lastDestroyed: function () {
+              alert('There are no meows left :3');
+            }
+          });
+        });
       });
     </script>
   </head>
 
   <body>
-    <div id="meows"></div>
 
     <h1>jQuery Meow Demo</h1>
 
@@ -89,5 +115,8 @@
     <h2>Uncloseable Demo</h2>
     <p>This one doesn't have a close button (not a good combo with the sticky option!).</p>
     <p><button id="uncloseable">Click me!</button></p>
+    <h2>Callbacks</h2>
+    <p>Meow supports callbacks</p>
+    <p><button id="callbacks">Click me!</botton></p>
   </body>
 </html>
