@@ -49,12 +49,12 @@
     Meow = function (options) {
       var that = this,
         message_type;
-      this.timestamp = +new Date(); // used to identify this meow and timeout
+      this.timestamp = new Date().getTime(); // used to identify this meow and timeout
       this.hovered = false;         // whether mouse is over or not
       this.manifest = {};           // stores the DOM object of this meow
       
       if (meows.size() <= 0) {
-        meow_area = 'meows-' + (+new Date());
+        meow_area = 'meows-' + new Date().getTime();
         $('body').prepend($(document.createElement('div')).attr({id: meow_area, 'class': 'meows'}));
         if (typeof options.beforeCreateFirst === 'function') {
           options.beforeCreateFirst.call(that);
@@ -149,7 +149,7 @@
           that.hovered = false;
           that.manifest.removeClass('hover');
           // Destroy the mow on mouseleave if it's timed out
-          if (that.timestamp + that.duration <= Date.now()) {
+          if (that.timestamp + that.duration <= new Date.getTime()) {
             that.destroy();
           }
         } else {
