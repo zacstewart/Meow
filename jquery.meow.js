@@ -37,8 +37,9 @@
         delete this.queue[timestamp];
       },
       size: function () {
-        var size = 0;
-        for (var timestamp in this.queue) {
+        var timestamp,
+          size = 0;
+        for (timestamp in this.queue) {
           if (this.queue.hasOwnProperty(timestamp)) { size += 1; }
         }
         return size;
@@ -135,7 +136,7 @@
           $(document.createElement('a'))
             .addClass('close')
             .html('&times;')
-            .attr('href', 'javascript:;')
+            .attr('href', '#close-meow-' + that.timestamp)
             .click(function (e) {
               e.preventDefault();
               that.destroy();
@@ -176,22 +177,22 @@
 
       this.destroy = function () {
         // Call callback if it's defined (this = meow DOM element)
-  			if (typeof options.beforeDestroy === 'function') {
-  			  options.beforeDestroy.call(that.manifest);
-  			}
+        if (typeof options.beforeDestroy === 'function') {
+          options.beforeDestroy.call(that.manifest);
+        }
         that.manifest.find('.inner').fadeTo(400, 0, function () {
           that.manifest.slideUp(function () {
             that.manifest.remove();
             meows.remove(that.timestamp);
             if (typeof options.afterDestroy === 'function') {
-      			  options.afterDestroy.call(null);
-      			}
-      			if (meows.size() <= 0) {
-      			  $('#' + meow_area).remove();
-        			if (typeof options.lastDestroyed === 'function') {
-        			  options.lastDestroyed.call(null);
-        			}
-      			}
+              options.afterDestroy.call(null);
+            }
+            if (meows.size() <= 0) {
+              $('#' + meow_area).remove();
+              if (typeof options.lastDestroyed === 'function') {
+                options.lastDestroyed.call(null);
+              }
+            }
           });
         });
       };
