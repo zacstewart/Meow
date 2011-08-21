@@ -189,8 +189,8 @@
             }
             if (meows.size() <= 0) {
               $('#' + meow_area).remove();
-              if (typeof options.lastDestroyed === 'function') {
-                options.lastDestroyed.call(null);
+              if (typeof options.afterDestroyLast === 'function') {
+                options.afterDestroyLast.call(null);
               }
             }
           });
