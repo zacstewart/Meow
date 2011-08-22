@@ -149,7 +149,7 @@
           that.hovered = false;
           that.manifest.removeClass('hover');
           // Destroy the mow on mouseleave if it's timed out
-          if (that.timestamp + that.duration <= new Date.getTime()) {
+          if (that.timestamp + that.duration <= new Date().getTime()) {
             that.destroy();
           }
         } else {
