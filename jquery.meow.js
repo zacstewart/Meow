@@ -29,9 +29,15 @@
       this.timestamp = new Date().getTime();  // used to identify this meow and timeout
       this.hovered = false;                   // whether mouse is over or not
 
+      if (typeof options.group === 'string') {
+        this.group = options.group;
+      } else {
+        this.group = 'body';
+      }
+
       if (meows.size() <= 0) {
         meow_area = 'meows-' + new Date().getTime();
-        $('body').prepend($(window.document.createElement('div')).attr({'id': meow_area, 'class': 'meows'}));
+        $(this.group).prepend($(window.document.createElement('div')).attr({'id': meow_area, 'class': 'meows'}));
         if (typeof options.beforeCreateFirst === 'function') {
           options.beforeCreateFirst.call(that);
         }
