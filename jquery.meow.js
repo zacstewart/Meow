@@ -53,9 +53,16 @@
       this.hovered = false;         // whether mouse is over or not
       this.manifest = {};           // stores the DOM object of this meow
       
+      // set optional container id/class, default to 'body'
+      if (typeof options.group === 'string') {
+        this.group = options.group;
+      } else {
+      	this.group = 'body';
+      }
+      
       if (meows.size() <= 0) {
         meow_area = 'meows-' + new Date().getTime();
-        $('body').prepend($(document.createElement('div')).attr({id: meow_area, 'class': 'meows'}));
+        $(this.group).prepend($(document.createElement('div')).attr({id: meow_area, 'class': 'meows'}));
         if (typeof options.beforeCreateFirst === 'function') {
           options.beforeCreateFirst.call(that);
         }
