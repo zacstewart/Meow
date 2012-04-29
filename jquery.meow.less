@@ -10,19 +10,10 @@
 .meow .inner {
   background: #191919;
   zoom: 1;
-  filter: alpha(opacity = 75);
-  background: rgba(25, 25, 25, .75);
+  .opacity(.75);
   border: 2px solid transparent;
-  -moz-border-radius: 10px;
-  -webket-border-radius: 10px;
-  -khtml-border-radius: 10px;
-  -o-border-radius: 10px;
-  border-radius: 10px;
-  -moz-box-shadow: 2px 2px 10px rgba(25, 25, 25, .25);
-  -webkit-box-shadow: 2px 2px 10px rgba(25, 25, 25, .25);
-  -khtml-box-shadow: 2px 2px 10px rgba(25, 25, 25, .25);
-  -o-box-shadow: 2px 2px 10px rgba(25, 25, 25, .25);
-  box-shadow: 2px 2px 10px rgba(25, 25, 25, .25);
+  .border-radius(10px);
+  .box-shadow(2px 2px 10px rgba(25, 25, 25, .25));
   color: #fff;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 15px;
@@ -65,14 +56,9 @@
 .meow.hover .inner .close {
   background: #191919;
   zoom: 1;
-  filter: alpha(opacity = 75);
-  background: rgba(25, 25, 25, .75);
+  .opacity(.75);
   border: 2px solid #ffffff;
-  -khtml-border-radius: 18px;
-  -moz-border-radius: 18px;
-  -o-border-radius: 18px;
-  -webket-border-radius: 18px;
-  border-radius: 18px;
+  .border-radius(18px);
   color: #ffffff;
   display: block;
   font-size: 22px;
