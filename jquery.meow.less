@@ -86,3 +86,33 @@
   top: 4px;
   width: 18px;
 }
+
+
+// mixins
+
+// border radius
+.border-radius(@radius: 5px) {
+  -webkit-border-radius: @radius;
+   -khtml-border-radius: @radius;
+     -moz-border-radius: @radius;
+       -o-border-radius: @radius;
+          border-radius: @radius;
+}
+
+// drop shadows
+.box-shadow(@shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: @shadow;
+   -khtml-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+       -o-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+
+// opacity
+.opacity(@opacity: 100) {
+  -webkit-opacity: @opacity;
+   -khtml-opacity: @opacity;
+     -moz-opacity: @opacity;
+       -o-opacity: @opacity;
+          opacity: @opacity;
+}
