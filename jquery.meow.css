@@ -6,38 +6,120 @@
 
 .meow {
   position: relative;
-  margin: 20px 20px 0 0;
+  margin: 12px 12px 0 0;
 }
 
 .meow .inner {
-  width: 300px;
+  display: block;
+  width: 280px;
   min-height: 48px;
-  padding: 10px;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  color: #fff;
-  text-shadow: 1px 1px 3px #000;
-  background: #191919;
-  border: 2px solid transparent;
-  -webkit-border-radius: 10px;
-   -khtml-border-radius: 10px;
-     -moz-border-radius: 10px;
-      -ms-border-radius: 10px;
-       -o-border-radius: 10px;
-          border-radius: 10px;
-  -webkit-opacity: 0.75;
-   -khtml-opacity: 0.75;
-     -moz-opacity: 0.75;
-      -ms-opacity: 0.75;
-       -o-opacity: 0.75;
-          opacity: 0.75;
+  padding: 9px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 24px;
+  color: #ffffff;
+  text-shadow: 0 1px 0 #000000;
+  background: #141414;
+  border: 2px solid #ffffff;
+  -webkit-border-radius: 6px;
+   -khtml-border-radius: 6px;
+     -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+       -o-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-opacity: 0.7;
+   -khtml-opacity: 0.7;
+     -moz-opacity: 0.7;
+      -ms-opacity: 0.7;
+       -o-opacity: 0.7;
+          opacity: 0.7;
   zoom: 1;
-  -webkit-box-shadow: 2px 2px 10px rgba(25, 25, 25, 0.25);
-   -khtml-box-shadow: 2px 2px 10px rgba(25, 25, 25, 0.25);
-     -moz-box-shadow: 2px 2px 10px rgba(25, 25, 25, 0.25);
-      -ms-box-shadow: 2px 2px 10px rgba(25, 25, 25, 0.25);
-       -o-box-shadow: 2px 2px 10px rgba(25, 25, 25, 0.25);
-          box-shadow: 2px 2px 10px rgba(25, 25, 25, 0.25);
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+   -khtml-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+     -moz-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+      -ms-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+       -o-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+.meow .inner:hover {
+  -webkit-opacity: 0.8;
+   -khtml-opacity: 0.8;
+     -moz-opacity: 0.8;
+      -ms-opacity: 0.8;
+       -o-opacity: 0.8;
+          opacity: 0.8;
+}
+
+.meow .inner:hover .close {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: block;
+  width: 18px;
+  height: 18px;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #000000;
+  background: #191919;
+  border: 2px solid #ffffff;
+  -webkit-border-radius: 100%;
+   -khtml-border-radius: 100%;
+     -moz-border-radius: 100%;
+      -ms-border-radius: 100%;
+       -o-border-radius: 100%;
+          border-radius: 100%;
+  -webkit-opacity: 0.8;
+   -khtml-opacity: 0.8;
+     -moz-opacity: 0.8;
+      -ms-opacity: 0.8;
+       -o-opacity: 0.8;
+          opacity: 0.8;
+  zoom: 1;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+   -khtml-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+     -moz-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+      -ms-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+       -o-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+.meow .inner:hover .close:hover {
+  -webkit-opacity: 0.9;
+   -khtml-opacity: 0.9;
+     -moz-opacity: 0.9;
+      -ms-opacity: 0.9;
+       -o-opacity: 0.9;
+          opacity: 0.9;
+}
+
+.meow .inner .icon {
+  float: left;
+  height: 48px;
+  min-width: 48px;
+  margin-right: 9px;
+}
+
+.meow .inner .icon img {
+  width: 48px;
+  height: 48px;
+}
+
+.meow .inner h1 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 24px;
+  color: #ffffff;
+  text-shadow: 0 1px 0 #000000;
+}
+
+.meow .inner .close {
+  display: none;
 }
 
 .meow .inner:after {
@@ -47,62 +129,4 @@
   line-height: 0;
   content: "\0200";
   visibility: hidden;
-}
-
-.meow.hover .inner {
-  border: 2px solid #fff;
-}
-
-.meow .inner h1 {
-  padding: 0;
-  margin: 0;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1;
-}
-
-.meow .inner .icon {
-  float: left;
-  width: 48px;
-  height: 48px;
-  margin-right: 6px;
-}
-
-.meow .inner .icon img {
-  max-width: 48px;
-  max-height: 48px;
-}
-
-.meow .inner .close {
-  display: none;
-}
-
-.meow.hover .inner .close {
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  display: block;
-  width: 18px;
-  height: 18px;
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 14px;
-  color: #ffffff;
-  text-align: center;
-  text-decoration: none;
-  background: #191919;
-  border: 2px solid #ffffff;
-  -webkit-border-radius: 18px;
-   -khtml-border-radius: 18px;
-     -moz-border-radius: 18px;
-      -ms-border-radius: 18px;
-       -o-border-radius: 18px;
-          border-radius: 18px;
-  -webkit-opacity: 0.75;
-   -khtml-opacity: 0.75;
-     -moz-opacity: 0.75;
-      -ms-opacity: 0.75;
-       -o-opacity: 0.75;
-          opacity: 0.75;
-  zoom: 1;
 }
