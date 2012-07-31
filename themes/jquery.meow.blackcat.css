@@ -1,0 +1,120 @@
+/* blackcat theme by Flip Stewart | github.com/shpoonj */
+
+.meows {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.meow {
+  position: relative;
+  margin: 12px 12px 0 0;
+}
+
+.meow .inner {
+  display: block;
+  width: 280px;
+  min-height: 48px;
+  padding: 9px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 24px;
+  color: #ffffff;
+  text-shadow: 0 1px 0 #000000;
+  background: rgba(20, 20, 20, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  -webkit-border-radius: 6px;
+   -khtml-border-radius: 6px;
+     -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+       -o-border-radius: 6px;
+          border-radius: 6px;
+  zoom: 1;
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+   -khtml-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+     -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+      -ms-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+       -o-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+}
+
+.meow .inner:hover {
+  background: rgba(20, 20, 20, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.meow .inner:hover .close {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: block;
+  width: 18px;
+  height: 18px;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #000000;
+  background: rgba(25, 25, 25, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  -webkit-border-radius: 100%;
+   -khtml-border-radius: 100%;
+     -moz-border-radius: 100%;
+      -ms-border-radius: 100%;
+       -o-border-radius: 100%;
+          border-radius: 100%;
+  -webkit-opacity: 0.8;
+   -khtml-opacity: 0.8;
+     -moz-opacity: 0.8;
+      -ms-opacity: 0.8;
+       -o-opacity: 0.8;
+          opacity: 0.8;
+  zoom: 1;
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+   -khtml-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+     -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+      -ms-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+       -o-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+}
+
+.meow .inner:hover .close:hover {
+  background: rgba(25, 25, 25, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.meow .inner .icon {
+  float: left;
+  height: 48px;
+  min-width: 48px;
+  margin-right: 9px;
+}
+
+.meow .inner .icon img {
+  width: 48px;
+  height: 48px;
+}
+
+.meow .inner h1 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 24px;
+  color: #ffffff;
+  text-shadow: 0 1px 0 #000000;
+}
+
+.meow .inner .close {
+  display: none;
+}
+
+.meow .inner:after {
+  display: block;
+  height: 0;
+  clear: both;
+  line-height: 0;
+  content: "\0200";
+  visibility: hidden;
+}
