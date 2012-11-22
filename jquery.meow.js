@@ -191,7 +191,9 @@
     };
 
   $.fn.meow = function (args) {
-    meows.add(new Meow(args));
+    var meow = new Meow(args);
+    meows.add(meow);
+    return meow;
   };
   $.meow = $.fn.meow;
 }(jQuery, window));
