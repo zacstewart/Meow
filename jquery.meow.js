@@ -55,7 +55,7 @@
 
       if (typeof options.message === 'string') {
         this.message = options.message;
-      } else if (options.message instanceof jQuery) {
+      } else if (options.message instanceof $) {
         if (options.message.is('input,textarea,select')) {
           this.message = options.message.val();
         } else {
