@@ -15,6 +15,8 @@ var options = {
 
 $.meow(options);
 ```
+See more [examples](http://zacstewart.github.com/Meow/).
+
 ## Options
 <table>
   <tr>
