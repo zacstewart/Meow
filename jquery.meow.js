@@ -1,7 +1,7 @@
 (function ($, window) {
   'use strict';
   // Meow queue
-  var meow_area,
+  var default_meow_area,
     meows = {
       queue: {},
       add: function (meow) {
@@ -29,19 +29,25 @@
       this.timestamp = new Date().getTime();  // used to identify this meow and timeout
       this.hovered = false;                   // whether mouse is over or not
 
-      if (typeof options.group === 'string') {
-        this.group = options.group;
-      } else {
-        this.group = 'body';
+      if (typeof default_meow_area === 'undefined'
+          && typeof options.container === 'undefined') {
+        default_meow_area = $(window.document.createElement('div'))
+            .attr({'id': ((new Date()).getTime()), 'class': 'meows'});
+        $('body').prepend(default_meow_area);
       }
 
       if (meows.size() <= 0) {
-        meow_area = 'meows-' + new Date().getTime();
-        $(this.group).prepend($(window.document.createElement('div')).attr({'id': meow_area, 'class': 'meows'}));
         if (typeof options.beforeCreateFirst === 'function') {
           options.beforeCreateFirst.call(that);
         }
       }
+
+      if (typeof options.container === 'string') {
+        this.container = $(options.container);
+      } else {
+        this.container = default_meow_area;
+      }
+
 
       if (typeof options.title === 'string') {
         this.title = options.title;
@@ -76,7 +82,7 @@
       }
 
       // Add the meow to the meow area
-      $('#' + meow_area).append($(window.document.createElement('div'))
+      this.container.append($(window.document.createElement('div'))
         .attr('id', 'meow-' + this.timestamp.toString())
         .addClass('meow')
         .html($(window.document.createElement('div')).addClass('inner').html(this.message))
@@ -162,7 +168,10 @@
                 options.afterDestroy.call(null);
               }
               if (meows.size() <= 0) {
-                $('#' + meow_area).remove();
+                if (default_meow_area instanceof $) {
+                  default_meow_area.remove();
+                  default_meow_area = undefined;
+                }
                 if (typeof options.afterDestroyLast === 'function') {
                   options.afterDestroyLast.call(null);
                 }

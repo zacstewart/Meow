@@ -50,6 +50,13 @@
             closeable: false
           });
         });
+        $('#in-container').click(function () {
+          $.meow({
+            message: 'I am contained within an element!',
+            icon: 'nyan-cat.gif',
+            container: '#meow-container'
+          });
+        });
         $('#callbacks').click(function () {
           $.meow({
             message: 'I have callbacks!',
@@ -115,6 +122,10 @@
     <h2>Uncloseable Demo</h2>
     <p>This one doesn't have a close button (not a good combo with the sticky option!).</p>
     <p><button id="uncloseable">Click me!</button></p>
+    <h2>Container Demo</h2>
+    <p>This one will be contained within an element.</p>
+    <div id="meow-container"></div>
+    <p><button id="in-container">Click me!</button></p>
     <h2>Callbacks</h2>
     <p>Meow supports callbacks</p>
     <p><button id="callbacks">Click me!</botton></p>
