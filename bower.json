@@ -1,0 +1,25 @@
+{
+  "name": "Meow",
+  "version": "0.0.0",
+  "homepage": "https://github.com/zacstewart/Meow.git",
+  "authors": [
+    "Zac Stewart"
+  ],
+  "description": "Growl work-a-like jQuery plugin",
+  "main": "jquery.meow.js",
+  "keywords": [
+    "jQuery",
+    "meow",
+    "plugin"
+  ],
+  "license": "Copyright",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "index.html",
+    "themes/*"
+  ]
+}
