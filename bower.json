@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "homepage": "https://github.com/zacstewart/Meow.git",
   "authors": [
-    "Zachary Stewart"
+    "Zac Stewart"
   ],
   "description": "Growl work-a-like jQuery plugin",
   "main": "jquery.meow.js",
